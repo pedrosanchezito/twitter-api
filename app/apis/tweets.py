@@ -1,5 +1,6 @@
 from flask_restplus import Namespace, Resource, fields
 from flask import abort
+from flask_login import login_required
 from app.models import Tweet
 from app import db
 
@@ -30,6 +31,7 @@ class TweetResource(Resource):
 
     @api.marshal_with(json_tweet, code=201)
     @api.expect(json_new_tweet, validate=True)
+    @login_required
     def patch(self, id):
         tweet = db.session.query(Tweet).get(id)
         if tweet is None:
@@ -39,6 +41,7 @@ class TweetResource(Resource):
             db.session.commit()
             return tweet, 201
 
+    @login_required
     def delete(self, id):
         tweet = db.session.query(Tweet).get(id)
         if tweet is None:
@@ -62,6 +65,7 @@ class TweetsResource(Resource):
 
     @api.marshal_with(json_tweet, code=201)
     @api.expect(json_new_tweet, validate=True)
+    @login_required
     def post(self):
         text = api.payload["text"]
         if len(text) > 0:
