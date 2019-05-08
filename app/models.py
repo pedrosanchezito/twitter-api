@@ -22,9 +22,15 @@ class User(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80))
-    email = db.Column(db.String(200))
-    api_key = db.Column(db.String(80))
+    password = db.Column('password' , db.String(20))
+    email = db.Column('email',db.String(50))
+    key = db.Column(db.String(150))
     tweets = db.relationship('Tweet', back_populates="user")
+
+    def __init__(self , username ,password , email):
+        self.username = username
+        self.password = password
+        self.email = email
 
     def generate_key(self):
         if not self.key:
@@ -41,7 +47,7 @@ class User(db.Model):
         return False
 
     def get_id(self):
-        return unicode(self.id)
+        return self.id
 
     def __repr__(self):
         return f"<User {self.username}>"

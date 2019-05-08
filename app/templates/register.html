@@ -1,5 +1,21 @@
-{% extends "layout.html" %}
+<!--{% extends "layout.html" %}
 {% block body %}
+-->
+
+
+<!doctype html>
+<title>TodoApp -- Store your Todo items</title>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<meta charset="utf-8">
+<style>
+body {
+    padding-top: 60px;
+    padding-bottom: 100px;
+}
+</style>
+
+<body>
+
   <form action="" method=post class="form-horizontal">
     <h2>Sign up for FlaskLogin(Todo) Application </h2>
     <div class="control-group">
@@ -13,7 +29,7 @@
     <div class="control-group">
         <div class="controls">
           <input type="password" id="password" name="password" class="input-xlarge"
-            placeholder="Enter Password" value="{{ request.form.password }}"
+            placeholder="Enter Password" value=""
             required>
         </div>
     </div>
@@ -21,7 +37,7 @@
     <div class="control-group">
         <div class="controls">
           <input type="email" id="email" name="email" class="input-xlarge"
-            placeholder="Enter Email" value="{{ request.form.username }}"
+            placeholder="Enter Email" value=""
             required>
         </div>
     </div>
@@ -32,4 +48,9 @@
         </div>
     </div>
   </form>
-{% endblock %}
+
+<!--{% endblock %}-->
+
+</body>
+
+</html>
