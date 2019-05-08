@@ -44,18 +44,15 @@ class TestTweetViews(TestCase):
         self.assertEqual(updated_tweet["text"], "New text")
 
     def test_tweet_delete(self):
-        first_tweet = Tweet(text="First tweet")
-        db.session.add(first_tweet)
-        db.session.commit()
+        response = self.client.post("/tweets", json={'text': 'New tweet!'})
+        tweet = self.client.get("/tweets/1").json
+        self.assertEqual(tweet["text"], "New tweet!")
         self.client.delete("/tweets/1")
         self.assertIsNone(db.session.query(Tweet).get(1))
 
     def test_tweet_show_all(self):
-        first_tweet = Tweet(text="First tweet")
-        second_tweet = Tweet(text="Second tweet")
-        db.session.add(first_tweet)
-        db.session.add(second_tweet)
-        db.session.commit()
+        self.client.post("/tweets", json={'text': 'First tweet!'})
+        self.client.post("/tweets", json={'text': 'Second tweet!'})
         response = self.client.get("/tweets")
         tweets = response.json
         self.assertEqual(response.status_code, 200)
