@@ -6,8 +6,3 @@ class TestHomeView(TestCase):
         app = create_app()
         app.config['TESTING'] = True
         return app
-
-    def test_home(self):
-        response = self.client.get("/hello")
-        text = response.data.decode()
-        self.assertIn("Goodbye", text)
